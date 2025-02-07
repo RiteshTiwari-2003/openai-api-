@@ -1,0 +1,76 @@
+# how to connect open ai with api step by step , what dependencies need to install in terminal , what to write step by step?
+
+1.  First , create a new directory for your project and set up the files: 
+create a new folder called openaiapi and create this files inside it:
+
+> requirement.text
+> .env
+> chat_example.py
+
+2. in requirement.txt add these dependencies 
+
+openai==1.12.0
+python-dotenv==1.0.0
+
+3. get your openai api key:
+
+> go to https://platform.openai.com/
+> sign up or login to your account 
+> click on your profil icons and select "view api keys"
+
+> click "create new secret key"
+> copy your api key
+
+$. create a .env file and add your api key:
+
+OPENAI_API_KEY=your_api_key;
+
+5. create chat_example.py with this code:
+
+from openai import openaifrom dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+
+load_dotenv()
+
+# initialize openai client
+
+client=OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+def chat_with_gpt(prompt):
+    try:
+        # create a chat complition
+        response=client.chat.complitions.create(
+            model="gpt-3.5-turbo",
+            message=[{"role":"system","content":prompt}]
+        )
+
+        # return the response
+        return response.choices[0].message.content
+    except Exception as e:
+        return str(e)
+
+# Example usage
+if __name__ == "__main__":
+    prompt = "Hello! How are you today?"
+    response = chat_with_gpt(prompt)
+    print(f"User: {prompt}")
+    print(f"Assistant: {response}")
+
+
+Install the dependencies: Open a terminal in your project directory and run:
+
+pip install -r requirements.txt
+Run the example: In the terminal, run:
+
+python chat_example.py
+
+importent notes:
+
+> never share your api key publicly
+> store it safely in the .env file
+> add .env to your .gitignore if using git 
+> the openAi api is not free, it uses credits based on your usages
+> you will need a payment methods set up in your openai account
+
