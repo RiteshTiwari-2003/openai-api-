@@ -156,7 +156,7 @@ const App=()=>{
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try{
-            const res=await axios.post("http://localhost:3000/api/chat",{
+            const res=await axios.post("http://localhost:5000/api/chat",{
                 message:userInput,
             });
             setResponse(res.data.reply);
